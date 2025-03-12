@@ -22,7 +22,8 @@ Tiež je dovolené pridavať do jazyka vlastné c++ funkcie pomocou objektu
 Context a Literal::function avšak majú povolené brať len jeden argument.
 
 Samotný jazyk definuje kľúčové slová let, in, with, if, else
-a podporuje viaceré štruktúry ako operátory + - / * % | &
+a podporuje viaceré štruktúry ako operátory + - / * % | &.
+
 funkcie v tvare 
 
     let funkcia : arg1 arg2 ... = ... in ...
