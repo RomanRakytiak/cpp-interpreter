@@ -219,6 +219,19 @@ void ResultSymbol::assign_or_declare_as_top(ProgramBuilder &builder) {
         reference.emplace(builder.stack_top());
 }
 
+void ScopeSymbol::define(ProgramBuilder &builder) {
+    if (is_declared() == false)
+        declare(builder);
+    auto frame = builder.new_stack_frame();
+    for (const auto &var : variables) {
+        if (var->needs_defining())
+            var->define(builder);
+    }
+    expression.push_or_define_in_place(builder);
+    assign_or_declare_as_top(builder);
+    frame.end_frame();
+}
+
 Symbol & UpdateSymbol::set(Variant index, Symbol &value, ProgramBuilder &builder) {
     values.emplace_back(index, &value);
     return *this;

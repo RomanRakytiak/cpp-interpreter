@@ -55,6 +55,17 @@ TEST(ProgramBuilderTest, ReadFromFile) {
     );
 }
 
+TEST(ProgramBuilderTest, LetDouble) {
+    ProgramBuilder builder;
+    std::stringstream code;
+    code << "let abc = 5 in abc + 5 + abc";
+    auto ast = builder.compile_expression(code);
+    Context context;
+    ast->create_symbols(builder, context).define(builder);
+    auto program = builder.build();
+    auto result = program.run();
+    ASSERT_EQ(result, Variant::integer(5 + 5 + 5));
+}
 
 TEST(ProgramBuilderTest, LetError) {
     ProgramBuilder builder;

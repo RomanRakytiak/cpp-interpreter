@@ -51,6 +51,8 @@ namespace project {
         virtual void delete_dependencies(ProgramBuilder& builder) {}
         virtual void destroy(ProgramBuilder& builder) {}
 
+        virtual bool needs_defining() { return true; }
+
         virtual void push_or_define_in_place(ProgramBuilder& builder);
 
         virtual ~Symbol() = default;
@@ -83,6 +85,29 @@ namespace project {
 
         void assign_or_declare_as_top(ProgramBuilder &builder);
 
+    };
+
+    class ScopeSymbol : public ResultSymbol {
+    public:
+        ScopeSymbol(const std::vector<Symbol *> &variables, Symbol &expression)
+            : variables(variables),
+              expression(expression) {
+        }
+
+        ScopeSymbol(Symbol& variable, Symbol &expression)
+            : expression(expression) {
+            variables.push_back(&variable);
+        }
+
+        explicit ScopeSymbol(Symbol &expression)
+            : expression(expression) {
+        }
+
+        void define(ProgramBuilder &builder) override;
+
+    private:
+        std::vector<Symbol*> variables;
+        Symbol& expression;
     };
 
     class Literal final : public ResultSymbol {
@@ -195,6 +220,8 @@ namespace project {
 
         void declare(ProgramBuilder& builder) override { throw std::logic_error("Function cannot be declared"); }
         void define(ProgramBuilder& builder) override { throw std::logic_error("Function cannot be defined");}
+
+        bool needs_defining() override { return false; }
 
         [[nodiscard]] std::string error_representation() const override { return "<function>"; }
     };

@@ -39,9 +39,10 @@ ASTLetExpression::ASTLetExpression(
 
 Symbol & ASTLetExpression::create_symbols(ProgramBuilder &builder, Context &parent) const {
     Context context(parent);
-    auto &new_symbol = assign->create_symbols(builder, parent);
-    context.new_symbol(variable, new_symbol);
-    return then_do->create_symbols(builder, context);
+    auto &assign_symbol = assign->create_symbols(builder, parent);
+    context.new_symbol(variable, assign_symbol);
+    auto &result_symbol = then_do->create_symbols(builder, context);
+    return builder.new_symbol<ScopeSymbol>(assign_symbol, result_symbol);
 }
 
 Symbol & ASTBranch::create_symbols(ProgramBuilder &builder, Context &parent) const {
