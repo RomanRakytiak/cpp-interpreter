@@ -39,7 +39,7 @@ získanie hodnoty zo slovníka cez # napr.
 
     { 1 = 2 } # 1
     
-tiež dovoľuje písať aj komenty pomocou ; napr. 
+tiež dovoľuje písať aj komentáre pomocou ; napr. 
 
     11 ; toto je komentár o 11
     
