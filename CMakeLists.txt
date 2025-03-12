@@ -45,8 +45,5 @@ add_library(gtest OBJECT ${GTEST_SOURCE_FILES})
 find_package(Threads REQUIRED)
 
 include_directories(GoogleTest)
-add_executable(${TARGET_NAME} ${SOURCE_FILES} ${TEST_FILES} ${GTEST_SOURCE_FILES}
-        TestsBytecodeBuilder.cpp
-        TestsProgram.cpp
-        TestsProgramBuilder.cpp)
+add_executable(${TARGET_NAME} ${SOURCE_FILES} ${TEST_FILES} ${GTEST_SOURCE_FILES})
 target_link_libraries(${TARGET_NAME} ${CMAKE_THREAD_LIBS_INIT})
