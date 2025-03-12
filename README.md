@@ -2,9 +2,9 @@
 
 Program - vyhodnocuje inštrukcie a dá sa spustiť.
 Všetky možné hodnoty sú obalené vo Variant triede.
-Program má v sebe zoznam inštrukcii a zoznam konštant.
+Program má v sebe zoznam inštrukcií a zoznam konštant.
 Variant môže byť nič, číslo, slovník, funkcia.
-Má viacero metód podľa toho ako chceme program spustiť, ale
+Program má viacero metód podľa toho ako chceme program spustiť, ale
 najjednoduchšia je metóda run(), ktorá spustí program a vráti výsledok.
 
 BytecodeBuilder - vytvára inštrukcie pre program.
@@ -15,7 +15,7 @@ Keď sú všetky inštrukcie zadané tak sa môže program vytvoriť cez build()
 ProgramBuilder - interpretuje kód v ľudskej podobe na inštrukcie.
 Využiva pri tom AST výrazy, ktoré sú jednoduché štruktúry a vedia sa
 skompilovať na symboly. Ďalej využiva symboly, ktoré reprezentujú
-vyrtuálne dáta a ich vzťahy medzi nimi. Najzákladnejší symbol je
+virtuálne dáta a ich vzťahy medzi nimi. Najzákladnejší symbol je
 literál, ktorý má priamo svoju hodnotu avšak sú tu i všeliaké symboly,
 ktoré reprezentujú výsledky nejakých operácii.
 Tiež je dovolené pridavať do jazyka vlastné c++ funkcie pomocou objektu
@@ -52,8 +52,9 @@ Ako hodnota nič sa používajú prazdne zátvorky () v zdroji pod názvom Unit.
             hodnota2 if podmienka2 else
     
             hodnota3
+    in ...
 
-Jazyk je slepý voči prázdnym znakom avšak je potrebné, aby každý operátor bol odedelený medzerami zprava aj zľava inak sa môže stať že sa bude považovať za súčasť názovu premennej.
+Jazyk je slepý voči prázdnym znakom avšak je potrebné, aby každý operátor bol odedelený medzerami sprava aj zľava inak sa môže stať že sa bude považovať za súčasť názovu premennej.
 
 Premenné sa môžu skaladať zo všetkých znakov okrem medzier, ale musia začínať nejakým písmenom abecedy teda premenna145' je dovolená ale 0var nie.
 
