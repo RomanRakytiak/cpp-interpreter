@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "BytecodeBuilder.h"
+#include "bytecode_builder.h"
 
-using namespace project;
+using namespace traf;
 
 
 TEST(ProgramTest, OverflowSubtractionTest) {

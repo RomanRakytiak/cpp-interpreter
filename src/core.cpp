@@ -2,9 +2,9 @@
 
 #include <limits>
 #include <strings.h>
-#include "ProgramBuilder.h"
+#include "program_builder.h"
 
-using namespace project;
+using namespace traf;
 
 Symbol * Context::evaluate(const std::string &name) const {
     if (table.contains(name) )
