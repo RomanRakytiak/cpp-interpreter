@@ -22,8 +22,14 @@ namespace traf {
 
         bool set_stack_pointer(intptr_t stack_pointer);
         bool move_stack_pointer(const intptr_t offset) { return set_stack_pointer(stack_pointer + offset); }
+        bool stack_pop() { return move_stack_pointer(-1); }
 
         [[nodiscard]] index stack_top() const;
+
+        /**
+         * Points at the top value.
+         * @return stack top pointer
+         */
         [[nodiscard]] intptr_t get_stack_pointer() const;
         [[nodiscard]] intptr_t get_program_counter() const;
         [[nodiscard]] index *get_index(intptr_t offset) const;

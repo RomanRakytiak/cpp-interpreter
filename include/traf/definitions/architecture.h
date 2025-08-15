@@ -10,9 +10,11 @@ namespace traf {
 
     template<class I>
     concept Instruction = requires(I inst, TrafThread& ctx) {
-        { inst.execute(ctx) } -> std::same_as<void>;
-        { inst.compile(*static_cast<void*>(nullptr), std::declval<word>()) } -> std::same_as<bool>;
+        { inst.execute(ctx, std::declval<word>()) } -> std::same_as<void>;
+        { inst::compile(*static_cast<void*>(nullptr), std::declval<word>()) } -> std::same_as<bool>;
         { I::name() } -> std::convertible_to<const char*>;
+        { I::stack_arguments() } -> std::same_as<int>;
+        { I::stack_change() } -> std::same_as<int>;
     };
 
     template<Instruction I, Instruction...Is>
