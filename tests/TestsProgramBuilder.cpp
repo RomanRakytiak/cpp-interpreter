@@ -1,8 +1,8 @@
 #include <fstream>
 #include <gtest/gtest.h>
-#include "ProgramBuilder.h"
+#include "program_builder.h"
 
-using namespace project;
+using namespace traf;
 
 TEST(ProgramBuilderTest, WriteToFile) {
     auto name = "write_test.txt";

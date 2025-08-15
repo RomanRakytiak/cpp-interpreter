@@ -1,12 +1,8 @@
-//
-// Created by roman on 7.12.2024.
-//
-
-#include "BytecodeBuilder.h"
+#include "bytecode_builder.h"
 
 #include <stdexcept>
 
-using namespace project;
+using namespace traf;
 
 ConstantAddress::ConstantAddress(const Program::word offset)
     : offset(offset)

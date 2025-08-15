@@ -2,10 +2,10 @@
 
 #include <map>
 
-#include "ProgramBuilder.h"
+#include "program_builder.h"
 
 
-using namespace project;
+using namespace traf;
 
 
 Symbol & ASTUnit::create_symbols(ProgramBuilder &builder, Context &parent) const {

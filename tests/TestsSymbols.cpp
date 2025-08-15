@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "ProgramBuilder.h"
+#include "program_builder.h"
 
-using namespace project;
+using namespace traf;
 
 TEST(SymbolTest, LiteralOverflowSubtraction) {
     ProgramBuilder builder;

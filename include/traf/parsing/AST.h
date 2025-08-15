@@ -1,9 +1,10 @@
 #ifndef AST_H
 #define AST_H
 
-#include "BytecodeBuilder.h"
+#include "bytecode_builder.h"
+#include "lexer.h"
 
-namespace project {
+namespace traf {
     struct ASTExpression {
         using Instruction = BytecodeBuilder::Instruction;
         virtual ~ASTExpression() = default;
@@ -16,6 +17,14 @@ namespace project {
 
         virtual void print(std::ostream& stream) const = 0;
         virtual std::unique_ptr<ASTExpression> copy() const = 0;
+    };
+
+    struct ASTValue : ASTExpression {
+        std::vector<token> tokens;
+        explicit ASTValue(std::vector<token> tokens) : tokens(std::move(tokens)) {}
+        Symbol& create_symbols(ProgramBuilder &builder, Context &parent) const override;
+        void print(std::ostream& stream) const override { stream << value; }
+        std::unique_ptr<ASTExpression> copy() const override { return std::make_unique<ASTFloat>(value); }
     };
 
     struct ASTFloat final : ASTExpression {

@@ -1,12 +1,12 @@
-#include "Symbols.h"
+#include "symbols.h"
 
 //#include <bits/locale_facets_nonio.h>
 #include <functional>
-#include <functional>
 
-#include "ProgramBuilder.h"
 
-using namespace project;
+#include "program_builder.h"
+
+using namespace traf;
 
 
 

@@ -2,7 +2,7 @@
 
 #include "core.h"
 
-namespace project {
+namespace traf {
 
 
 
@@ -81,6 +81,6 @@ namespace project {
         size_t execute_instruction(std::vector<Variant>& stack, size_t index) const;
     };
 
-} // project
+}
 
 
