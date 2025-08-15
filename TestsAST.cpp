@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "program_builder.h"
+#include "ProgramBuilder.h"
 
-using namespace traf;
+using namespace project;
 
 TEST(ASTTest, ASTAdditionAndEvaluate) {
     ProgramBuilder builder;
@@ -36,12 +36,6 @@ TEST(ASTTest, ASTSingleInteger) {
     const auto value = dynamic_cast<ASTInteger*>(ast.get());
     ASSERT_NE(value, nullptr);
     ASSERT_EQ(value->value, "42");
-}
-
-
-
-TEST(ASTTest, TemplateFor) {
-    template_for<int, 1, 5>([]<int I>(){ std::cout << I << std::endl; });
 }
 
 TEST(ASTTest, ASTLetExpressionWithCondition) {

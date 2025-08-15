@@ -3,9 +3,9 @@
 
 #include <utility>
 
-#include "bytecode_builder.h"
+#include "BytecodeBuilder.h"
 
-namespace traf {
+namespace project {
 
     class Symbol {
     protected:

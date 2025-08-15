@@ -1,4 +1,8 @@
-#include "program.h"
+//
+// Created by roman on 7.12.2024.
+//
+
+#include "Program.h"
 
 #include <iostream>
 #include <span>
@@ -10,7 +14,7 @@ Variant first___ {pop(stack)};              \
 stack.push_back(call(first___, second___)); \
 } break
 
-using namespace traf;
+using namespace project;
 
 Variant::Variant() : data(Unit()) {}
 
@@ -355,7 +359,7 @@ size_t Program::execute_instruction(std::vector<Variant> &stack, const size_t in
 }
 
 
-std::ostream & traf::operator<<(std::ostream &stream, const Variant &variant) {
+std::ostream & project::operator<<(std::ostream &stream, const Variant &variant) {
     std::visit([&]<class T>(const T &self) {
         if constexpr (std::is_same_v<T, Variant::map>) {
             stream << '{';

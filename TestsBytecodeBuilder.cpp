@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "bytecode_builder.h"
+#include "BytecodeBuilder.h"
 
-using namespace traf;
+using namespace project;
 
 TEST(BytecodeBuilderTest, NextConstantRef_ReturnsCorrectReference) {
     const BytecodeBuilder builder;

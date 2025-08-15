@@ -1,9 +1,9 @@
 #pragma once
 
 #include "AST.h"
-#include "symbols.h"
+#include "Symbols.h"
 
-namespace traf {
+namespace project {
 
     class ProgramBuilder : public BytecodeBuilder {
         std::vector<std::unique_ptr<Symbol>> symbols;
@@ -67,7 +67,7 @@ namespace traf {
 
 
 template<typename T>
-void traf::ProgramBuilder::assign(const Symbol &dest, T &&src) {
+void project::ProgramBuilder::assign(const Symbol &dest, T &&src) {
     if constexpr (std::is_same_v<std::remove_const_t<T>, Symbol&>)
         BytecodeBuilder::assign(dest.get_reference(), src.get_reference());
     else
@@ -75,12 +75,12 @@ void traf::ProgramBuilder::assign(const Symbol &dest, T &&src) {
 }
 
 template<typename T, typename ... TYPES>
-T& traf::ProgramBuilder::new_symbol(TYPES &&...args) {
+T& project::ProgramBuilder::new_symbol(TYPES &&...args) {
     static_assert(std::is_base_of_v<Symbol, T>, "New symbol must be a subclass of Symbol");
     return *reinterpret_cast<T*>(symbols.emplace_back(std::make_unique<T>(std::forward<TYPES>(args)...)).get());
 }
 
-inline std::ostream& operator<<(std::ostream& stream, const traf::Symbol& object) {
+inline std::ostream& operator<<(std::ostream& stream, const project::Symbol& object) {
     stream << object.error_representation();
     return stream;
 }

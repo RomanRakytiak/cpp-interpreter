@@ -1,8 +1,8 @@
 #pragma once
 
-#include "program.h"
+#include "Program.h"
 
-namespace traf {
+namespace project {
 
     struct ConstantAddress {
         const Program::word offset;
@@ -145,7 +145,7 @@ namespace traf {
 }
 
 template<std::integral T>
-traf::StackAddress traf::BytecodeBuilder::push(T value) {
+project::StackAddress project::BytecodeBuilder::push(T value) {
     if (value < 0 && value >= Program::max_word_limit)
         return push(Variant::integer(value));
     command({
@@ -156,13 +156,13 @@ traf::StackAddress traf::BytecodeBuilder::push(T value) {
 }
 
 template<class T>
-traf::JumpAddress traf::BytecodeBuilder::jump_if_positive(T &&value) {
+project::JumpAddress project::BytecodeBuilder::jump_if_positive(T &&value) {
     push(std::forward<T>(value));
     return jump_if_stack_top_positive();
 }
 
 template<class T1, class T2>
-traf::StackAddress traf::BytecodeBuilder::get(T1 &&value, T2 &&index) {
+project::StackAddress project::BytecodeBuilder::get(T1 &&value, T2 &&index) {
     push(std::forward<T1>(value));
     push(std::forward<T2>(index));
     command(Program::GET);
@@ -170,21 +170,21 @@ traf::StackAddress traf::BytecodeBuilder::get(T1 &&value, T2 &&index) {
 }
 
 template<class T1, class T2, class T3>
-traf::StackAddress traf::BytecodeBuilder::set(T1 &&object, T2 &&index, T3 &&value) {
+project::StackAddress project::BytecodeBuilder::set(T1 &&object, T2 &&index, T3 &&value) {
     push(std::forward<T1>(object));
     stack_top_set(std::forward<T2>(index), std::forward<T3>(value));
     return stack_top();
 }
 
 template<class T1, class T2>
-void traf::BytecodeBuilder::stack_top_set(T1 &&index, T2 &&value) {
+void project::BytecodeBuilder::stack_top_set(T1 &&index, T2 &&value) {
     push(std::forward<T1>(index));
     push(std::forward<T2>(value));
     command(Program::SET);
 }
 
 template<class T1, class T2>
-traf::StackAddress traf::BytecodeBuilder::equal(T1 &&first, T2 &&second) {
+project::StackAddress project::BytecodeBuilder::equal(T1 &&first, T2 &&second) {
     push(std::forward<T1>(first));
     push(std::forward<T2>(second));
     command(Program::EQUAL);
@@ -192,7 +192,7 @@ traf::StackAddress traf::BytecodeBuilder::equal(T1 &&first, T2 &&second) {
 }
 
 template<typename T>
-void traf::BytecodeBuilder::assign(const StackAddress destination, T &&value) {
+void project::BytecodeBuilder::assign(const StackAddress destination, T &&value) {
     if constexpr (std::is_same_v<T, StackAddress>) {
         if (destination == value)
             return;
@@ -202,7 +202,7 @@ void traf::BytecodeBuilder::assign(const StackAddress destination, T &&value) {
 }
 
 template<typename T1, typename T2>
-traf::StackAddress traf::BytecodeBuilder::add(T1 &&first, T2 &&second) {
+project::StackAddress project::BytecodeBuilder::add(T1 &&first, T2 &&second) {
     push(std::forward<T1>(first));
     push(std::forward<T2>(second));
     command(Program::OVERFLOW_ADD);
@@ -210,7 +210,7 @@ traf::StackAddress traf::BytecodeBuilder::add(T1 &&first, T2 &&second) {
 }
 
 template<typename T1, typename T2>
-traf::StackAddress traf::BytecodeBuilder::sub(T1 &&first, T2 &&second) {
+project::StackAddress project::BytecodeBuilder::sub(T1 &&first, T2 &&second) {
     push(std::forward<T1>(first));
     push(std::forward<T2>(second));
     command(Program::OVERFLOW_SUB);
@@ -218,7 +218,7 @@ traf::StackAddress traf::BytecodeBuilder::sub(T1 &&first, T2 &&second) {
 }
 
 template<typename T1, typename T2>
-traf::StackAddress traf::BytecodeBuilder::mul(T1 &&first, T2 &&second) {
+project::StackAddress project::BytecodeBuilder::mul(T1 &&first, T2 &&second) {
     push(std::forward<T1>(first));
     push(std::forward<T2>(second));
     command(Program::OVERFLOW_MUL);
@@ -226,7 +226,7 @@ traf::StackAddress traf::BytecodeBuilder::mul(T1 &&first, T2 &&second) {
 }
 
 template<typename T1, typename T2>
-traf::StackAddress traf::BytecodeBuilder::div(T1 &&first, T2 &&second) {
+project::StackAddress project::BytecodeBuilder::div(T1 &&first, T2 &&second) {
     push(std::forward<T1>(first));
     push(std::forward<T2>(second));
     command(Program::OVERFLOW_DIV);
@@ -234,7 +234,7 @@ traf::StackAddress traf::BytecodeBuilder::div(T1 &&first, T2 &&second) {
 }
 
 template<typename T1, typename T2>
-traf::StackAddress traf::BytecodeBuilder::mod(T1 &&first, T2 &&second) {
+project::StackAddress project::BytecodeBuilder::mod(T1 &&first, T2 &&second) {
     push(std::forward<T1>(first));
     push(std::forward<T2>(second));
     command(Program::OVERFLOW_MOD);
@@ -242,7 +242,7 @@ traf::StackAddress traf::BytecodeBuilder::mod(T1 &&first, T2 &&second) {
 }
 
 template<typename REF, typename...TYPES>
-traf::StackAddress traf::BytecodeBuilder::call(
+project::StackAddress project::BytecodeBuilder::call(
     REF&& callable,
     TYPES&&...arguments
 ) {
